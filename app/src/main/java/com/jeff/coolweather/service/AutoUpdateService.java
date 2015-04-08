@@ -35,7 +35,7 @@ public class AutoUpdateService extends Service {
             }
         }).start();
         AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        int eightHour = 1000;
+        int eightHour = 8 * 60 * 60 * 1000;
         long triggerAtTime = SystemClock.elapsedRealtime() + eightHour;
         Intent i = new Intent(this, AutoUpdateReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(this, 0, i, 0);
@@ -47,7 +47,7 @@ public class AutoUpdateService extends Service {
      * 更新天气信息
      */
     private void updateWeather() {
-        Toast.makeText(AutoUpdateService.this, "自动更新天气...",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(AutoUpdateService.this, "自动更新天气...",Toast.LENGTH_SHORT).show();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherCode = prefs.getString("weather_code", "");
         String address = "http://m.weather.com.cn/atad/" + weatherCode + ".html";
